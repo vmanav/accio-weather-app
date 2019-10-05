@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WeatherItIs</title>
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- my script -->
+    <script src="/js/script.js"></script>
+
+    {{!-- BOOTSTRAP --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- my css file  -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
+    <!-- font awesome v5 toolkit script -->
+    <script src="https://kit.fontawesome.com/e00a1e7cf5.js"></script>
+
+    <!-- fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Caveat:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="container main">
+
+        <div class="container pt-2 pb-1 d-flex flex-row justify-content-center" id="heading">
+            {{!-- <h1 id="heading">Accio Weather App</h1> --}}
+            <div id="heading">
+                <span>Accio Weather</span>
+            </div>
+
+        </div>
+
+        <div class="container pt-1 m-2">
+
+            <form action="/" method="POST" id="accioAppForm">
+
+                <div class="form-group text-center" style="font-family:'Roboto Mono', monospace;">
+                    <input name="city" type="text" class="form-control" placeholder="ENTER A CITY" required
+                        style="width:30%; margin:auto;padding-left: 2%;" id="input">
+                    <small id="emailHelp" class="form-text text-info">Must be a valid city name.</small>
+                    <button type="submit" id="submitButton" class="btn btn-outline-dark mt-4">Get
+                        Weather</button>
+                </div>
+
+            </form>
+        </div>
+
+
+        <div class="container p-3 mt-4 d-flex flex-row justify-content-center aling-items-start flex-wrap"
+            id="infoContainer">
+
+        </div>
+
+
+        <div class="container pb-3" id="clearOptionDiv">
+            <button type="button" id="clearDataButton" class="btn btn-danger">Clear All Data</button>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+body {
+    background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url("/images/bg.jpg");
+}
+
+/* Change Autocomplete styles in Chrome*/
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus {
+    border: 1.5px solid white;
+    -webkit-text-fill-color: #292b2c;
+    box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 15000s ease-in-out 0s;
+}
+
+#input {
+    border: 1.5px solid #292b2c;
+}
+
+.main {
+    height: 100vh;
+}
+.weatherCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    color: white;
+    background-color: #292b2c;
+}
+
+#heading {
+    font-size: 54px;
+    background-image: linear-gradient(370deg, #090A0F 0%, #000000 25%, #090D11 50%, #06070C 75%, #03070F 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Tangerine', cursive;
+}
+
+#submitButton {
+    margin: auto;
+    font-size: 24px;
+    font-family: 'Caveat', cursive;
+}
+
+#submitButton:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.2s;
+}
+
+#infoContainer {
+    font-family: 'Architects Daughter', cursive;
+}
+
+#desc {
+    font-family: 'Inconsolata', monospace;
+}
