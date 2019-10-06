@@ -7,8 +7,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-    res.sendFile('/index.html')
-
+    res.sendFile('/index.html');
 })
 
 app.listen(PORT, () => {

@@ -79,6 +79,7 @@ function deleteCookie() {
     createCookie("", -1);
 }
 
+
 $(() => {
 
     let input = $('#input')
@@ -86,19 +87,37 @@ $(() => {
     let accioAppForm = $('#accioAppForm')
     let infoContainer = $('#infoContainer');
     let clearDataButton = $('#clearDataButton');
+    let heading = $('#heading');
 
-
-    // When page is loaded, Check if a Cookie Exists
-    if (checkIfCookieExists("city")) {
-        // read the cities from cookie 
-        citiesInCookie = getCitiesFromCookie();
-        // console.log(citiesInCookie)
-        for (i = 0; i < citiesInCookie.length; i++) {
-            getWeather(citiesInCookie[i])
-        }
+    // function to stop the laoding animation when data is loaded
+    function stopLoader() {
+        $('.loader').fadeOut("slow");
     }
-    else {
-        alert("No Previous Data found for browser.");
+
+    // Load user data fron cookies if present
+    loadUserDataFromCookie(stopLoader);
+
+
+    function loadUserDataFromCookie(callback) {
+
+        // Check if a Cookie Exists
+        if (checkIfCookieExists("city")) {
+            // read the cities from cookie 
+            citiesInCookie = getCitiesFromCookie();
+            // console.log("city hai ")
+            for (i = 0; i < citiesInCookie.length; i++) {
+                getWeather(citiesInCookie[i])
+            }
+            // $('.loader').fadeOut();
+            setTimeout(function () {
+                callback();
+            }, 2000);
+        }
+        else {
+            // when NO data presnt removee animation slowly
+            alert("No Previous Data found for browser.");
+            $('.loader').fadeOut("slow");
+        }
     }
 
     // append weather to cotainer
@@ -138,6 +157,9 @@ $(() => {
 
             // Now we add this cookie to the user's cookie
             addThisDataInUserCookie(cityName.toLowerCase())
+
+            // set the input to empty
+            input.val("");
         })
             .fail(() => {
                 // alert("FAILURE")
@@ -151,7 +173,6 @@ $(() => {
         e.preventDefault()
         let cityName = input.val();
         getWeather(cityName);
-
     })
 
     clearDataButton.click(() => {
