@@ -27,7 +27,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 }
 
 #heading {
-    font-size: 54px;
+    font-size: 2em;
     background-image: linear-gradient(370deg, #090A0F 0%, #000000 25%, #090D11 50%, #06070C 75%, #03070F 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -37,7 +37,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 
 #submitButton {
     margin: auto;
-    font-size: 24px;
+    font-size: 1.5em;
     font-family: 'Caveat', cursive;
 }
 

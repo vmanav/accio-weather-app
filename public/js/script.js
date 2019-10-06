@@ -3,7 +3,7 @@ const apiKey = '1b8975e74fb3966da59cd7d3b51ccbf8';
 
 // Creating a Cookie
 function createCookie(value, maxAgeSeconds = 86400) {
-    // this maxAgeSeconds is equivalent to 1 day
+    // this maxAgeSeconds is equivalent to 1 day = 86400
 
     const key = "city";
     newCookie = `${key}=${value};max-age=${maxAgeSeconds}`;
