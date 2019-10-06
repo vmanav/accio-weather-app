@@ -136,7 +136,7 @@ $(() => {
 
     // function to retrive weather for  cityName
     function getWeather(cityName) {
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
         $.get(url, function (data) {
             // console.log(data);
