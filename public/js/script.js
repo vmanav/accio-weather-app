@@ -98,22 +98,21 @@ $(() => {
         }
     }
     else {
-        alert("No Previous Data found for user.");
+        alert("No Previous Data found for browser.");
     }
 
     // append weather to cotainer
     function addThisToMyScreen(weatherObject) {
 
         let html = `<div class="m-3 p-4 weatherCard">
-                <span><b>${weatherObject.name}</b></span>
+                <span class="spacedData"><b>${weatherObject.name}</b></span>
                 <br>
-                <span><b><i>${weatherObject.temp} &#8451</i></b></span>
+                <span class="spacedData"><b><i>${weatherObject.temp} &#8451</i></b></span>
                 <br>
                 <span class="badge badge-pill badge-info" id="desc" style="font-size: 1em">${weatherObject.desc}</span>
             </div>`;
 
         infoContainer.append(html);
-
     }
 
     // function to retrive weather for  cityName
@@ -138,7 +137,7 @@ $(() => {
             addThisToMyScreen(weatherObject);
 
             // Now we add this cookie to the user's cookie
-            addThisDataInUserCookie(cityName)
+            addThisDataInUserCookie(cityName.toLowerCase())
         })
             .fail(() => {
                 // alert("FAILURE")
