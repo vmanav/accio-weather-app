@@ -145,7 +145,7 @@ $(() => {
                 </div>`;
         }
 
-        infoContainer.append(html);
+        infoContainer.prepend(html);
     }
 
     // function to retrive weather for  cityName
