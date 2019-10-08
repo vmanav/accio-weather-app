@@ -24,6 +24,16 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     border-radius: 5px;
     color: white;
     background-color: #292b2c;
+    /* text-align: center; */
+}
+
+.weatherCard-inv {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    color: #292b2c;
+    background-color: #F9FEFD;
+    /* EFFBC8; */
+    /* text-align: center; */
 }
 
 #heading {
@@ -36,6 +46,12 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 }
 
 #submitButton {
+    margin: auto;
+    font-size: 1.5em;
+    font-family: 'Caveat', cursive;
+}
+
+#currentWeatherButton {
     margin: auto;
     font-size: 1.5em;
     font-family: 'Caveat', cursive;

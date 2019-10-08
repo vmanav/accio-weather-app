@@ -88,6 +88,7 @@ $(() => {
     let infoContainer = $('#infoContainer');
     let clearDataButton = $('#clearDataButton');
     let heading = $('#heading');
+    let currentWeatherButton = $('#currentWeatherButton');
 
     // function to stop the laoding animation when data is loaded
     function stopLoader() {
@@ -121,15 +122,28 @@ $(() => {
     }
 
     // append weather to cotainer
-    function addThisToMyScreen(weatherObject) {
-
-        let html = `<div class="m-3 p-4 weatherCard">
-                <span class="spacedData"><b>${weatherObject.name}</b></span>
-                <br>
-                <span class="spacedData"><b><i>${weatherObject.temp} &#8451</i></b></span>
-                <br>
-                <span class="badge badge-pill badge-info" id="desc" style="font-size: 1em">${weatherObject.desc}</span>
-            </div>`;
+    function addThisToMyScreen(weatherObject, currentPosition = false) {
+        if (currentPosition == true) {
+            html = `<div class="m-3 p-4 weatherCard-inv">
+                    <span class="spacedData">
+                    <i style="color: Dodgerblue; font-size: 1.3em; opacity: 0.9; text-align:center;" class="fas fa-map-marker-alt"></i>
+                    <b>${weatherObject.name}</b>
+                    </span>
+                    <br> 
+                    <span class="spacedData"><b><i>${weatherObject.temp} &#8451</i></b></span>
+                    <br>
+                    <span class="badge badge-pill badge-info" id="desc" style="font-size: 1em">${weatherObject.desc}</span>
+                </div>`;
+        }
+        else {
+            html = `<div class="m-3 p-4 weatherCard">
+                    <span class="spacedData"><b>${weatherObject.name}</b></span>
+                    <br>
+                    <span class="spacedData"><b><i>${weatherObject.temp} &#8451</i></b></span>
+                    <br>
+                    <span class="badge badge-pill badge-info" id="desc" style="font-size: 1em">${weatherObject.desc}</span>
+                </div>`;
+        }
 
         infoContainer.append(html);
     }
@@ -162,12 +176,10 @@ $(() => {
             input.val("");
         })
             .fail(() => {
-                // alert("FAILURE")
-                // console.log(cityName);
+                // alert("FAILURE"); console.log(cityName);
                 alert("Unable to retrive data for " + cityName);
             })
     }
-
 
     accioAppForm.submit((e) => {
         e.preventDefault()
@@ -178,6 +190,42 @@ $(() => {
     clearDataButton.click(() => {
         deleteCookie();
         infoContainer.html("");
+    })
+
+    // function to retrive weather for current location
+    function getCurrentLocationWeather(lat, lon) {
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+        $.get(url, function (data) {
+
+            let name = data.name;
+            let temp = data.main.temp;
+            let desc = data.weather[0].description;
+
+            weatherObject = {
+                "name": name,
+                "temp": temp,
+                "desc": desc
+            }
+            // console.log(weatherObject)
+            addThisToMyScreen(weatherObject, true);
+        })
+            .fail(() => {
+                // alert("FAILURE")
+                alert("Unable to retrive data for your location.");
+            })
+
+    }
+
+    currentWeatherButton.click(() => {
+        navigator.geolocation.getCurrentPosition((data) => {
+            // console.log("lat -> ", data.coords.latitude); console.log("Rounded OFF lat -> ", Math.round(data.coords.latitude))
+            // console.log("lon -> ", data.coords.longitude); console.log("Rounded OFF lat -> ", Math.round(data.coords.longitude))
+            let lat = Math.round(data.coords.latitude * 100) / 100;
+            let lon = Math.round(data.coords.longitude * 100) / 100;
+            getCurrentLocationWeather(lat, lon)
+        })
+
     })
 
 })

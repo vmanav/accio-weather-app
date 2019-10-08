@@ -45,7 +45,7 @@
 
         </div>
 
-        <div class="container pt-1 m-2">
+        <div class="container m-1">
 
             <form action="/" method="POST" id="accioAppForm">
 
@@ -53,16 +53,40 @@
                     <input name="city" type="text" class="form-control" placeholder="ENTER A CITY" required
                         style="width:30%; margin:auto;padding-left: 2%;" id="input">
                     <small id="emailHelp" class="form-text text-info">Must be a valid city name.</small>
-                    <button type="submit" id="submitButton" class="btn btn-outline-dark mt-4">Get
+                    <button type="submit" id="submitButton" class="btn btn-outline-dark m-3"
+                        title="Get weather for queried city.">Get
                         Weather</button>
+                    <button type="button" id="currentWeatherButton" class="btn btn-outline-dark m-3"
+                        title="Get weather for your location.">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
                 </div>
 
             </form>
         </div>
 
 
-        <div class="container p-3 mt-4 d-flex flex-row justify-content-center aling-items-start flex-wrap"
+        <div class="container p-2 mt-2 d-flex flex-row justify-content-center aling-items-start flex-wrap"
             id="infoContainer">
+
+            <!-- <div class="m-3 p-4 weatherCard-inv">
+                <span class="spacedData">
+                    <i style="color: Dodgerblue; font-size: 1.5em; opacity: 0.9; text-align:center;" class="fas fa-map-marker-alt"></i>
+                    TEST CITY NAME
+                </span>
+                <br>
+                <span class="spacedData"><b><i>TEST</i></b></span>
+                <br>
+                <span class="badge badge-pill badge-info" id="desc" style="font-size: 1em">TEST</span>
+            </div>
+
+            <div class="m-3 p-4 weatherCard">
+                <span class="spacedData"><b>TEST</b></span>
+                <br>
+                <span class="spacedData"><b><i>TEST</i></b></span>
+                <br>
+                <span class="badge badge-pill badge-info" id="desc" style="font-size: 1em">TEST</span>
+            </div> -->
 
         </div>
 
