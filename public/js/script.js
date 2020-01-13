@@ -193,7 +193,7 @@ $(() => {
     })
 
     // function to retrive weather for current location
-    function getCurrentLocationWeather(lat, lon) {
+    function getCurrentLocationWeather(lat, lon, speech) {
         let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
         $.get(url, function (data) {
@@ -201,6 +201,11 @@ $(() => {
             let name = data.name;
             let temp = data.main.temp;
             let desc = data.weather[0].description;
+
+            if (speech == true) {
+                console.log("speech -> true")
+                textToSpeechOutput(name, temp, desc);
+            }
 
             weatherObject = {
                 "name": name,
@@ -227,5 +232,118 @@ $(() => {
         })
 
     })
+
+    // Speech Recignition for weather
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+
+
+    recognition.addEventListener('result', (e) => {
+        // console.log(e.results)
+
+        // console.log(transcript);
+        const transcript = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('')
+
+        console.log(transcript)
+
+        if (e.results[0].isFinal) {
+
+            // console.log("Fianl vala -", e.results[0][0].transcript)
+            finalTranscript = e.results[0][0].transcript;
+
+            // Scanning for content
+            if (finalTranscript.includes('weather')) {
+                console.log("QUERY WEATHER")
+
+                navigator.geolocation.getCurrentPosition((data) => {
+                    // console.log("lat -> ", data.coords.latitude); console.log("Rounded OFF lat -> ", Math.round(data.coords.latitude))
+                    // console.log("lon -> ", data.coords.longitude); console.log("Rounded OFF lat -> ", Math.round(data.coords.longitude))
+                    let lat = Math.round(data.coords.latitude * 100) / 100;
+                    let lon = Math.round(data.coords.longitude * 100) / 100;
+                    getCurrentLocationWeather(lat, lon, true)
+                })
+
+            }
+
+        }
+
+    })
+
+
+    recognition.addEventListener('end', recognition.start);
+
+    recognition.start();
+
+
+    // Text to Speech Output
+    function textToSpeechOutput(name, temp, desc) {
+
+        console.log("textToSpeechOutput CALLED --- ")
+        var synth = window.speechSynthesis;
+
+        var utter = new SpeechSynthesisUtterance();
+
+        var textToBeSpoken = `${desc} at ${name}, with temprature of ${temp} degree Celcius.`
+
+        // list of languages is probably not loaded, wait for it
+        if (window.speechSynthesis.getVoices().length == 0) {
+            window.speechSynthesis.addEventListener('voiceschanged', function () {
+                console.log("Lenth 0 vala case");
+                textToSpeech(textToBeSpoken);
+            });
+        }
+        else {
+            // languages list available, no need to wait
+            console.log("languages list available, no need to wait CASE");
+            textToSpeech(textToBeSpoken)
+        }
+
+       
+    }
+
+
+    function textToSpeech(textToBeSpoken) {
+
+        console.log("textToSpeech called----");
+
+
+        // get all voices that browser offers
+        var available_voices = window.speechSynthesis.getVoices();
+
+        // this will hold an english voice
+        var english_voice = '';
+
+        // find voice by language locale "en-US"
+        // if not then select the first voice
+        console.log("available_voices", available_voices)
+
+        for (var i = 0; i < available_voices.length; i++) {
+            if (available_voices[i].lang === 'en-US') {
+                english_voice = available_voices[i];
+                break;
+            }
+        }
+        if (english_voice === '')
+            english_voice = available_voices[0];
+
+        // new SpeechSynthesisUtterance object
+        var utter = new SpeechSynthesisUtterance();
+        utter.rate = 1;
+        utter.pitch = 0.5;
+        utter.text = textToBeSpoken;
+        utter.voice = english_voice;
+
+        // event after text has been spoken
+        utter.onend = function () {
+            // alert('Speech has finished');
+        }
+        // speak
+        window.speechSynthesis.speak(utter);
+    }
 
 })
