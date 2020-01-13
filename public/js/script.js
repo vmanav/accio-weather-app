@@ -233,7 +233,9 @@ $(() => {
 
     })
 
-    // Speech Recignition for weather
+
+    // Speech Recognition for weather
+    
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     const recognition = new SpeechRecognition();
@@ -283,34 +285,17 @@ $(() => {
     // Text to Speech Output
     function textToSpeechOutput(name, temp, desc) {
 
-        console.log("textToSpeechOutput CALLED --- ")
         var synth = window.speechSynthesis;
 
         var utter = new SpeechSynthesisUtterance();
 
         var textToBeSpoken = `${desc} at ${name}, with temprature of ${temp} degree Celcius.`
 
-        // list of languages is probably not loaded, wait for it
-        if (window.speechSynthesis.getVoices().length == 0) {
-            window.speechSynthesis.addEventListener('voiceschanged', function () {
-                console.log("Lenth 0 vala case");
-                textToSpeech(textToBeSpoken);
-            });
-        }
-        else {
-            // languages list available, no need to wait
-            console.log("languages list available, no need to wait CASE");
-            textToSpeech(textToBeSpoken)
-        }
-
-       
+        textToSpeech(textToBeSpoken);
     }
 
 
     function textToSpeech(textToBeSpoken) {
-
-        console.log("textToSpeech called----");
-
 
         // get all voices that browser offers
         var available_voices = window.speechSynthesis.getVoices();
